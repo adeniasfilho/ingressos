@@ -38,6 +38,15 @@ app.put("/ingressos", async (req, res) => {
     });
     res.status(201).send(ingressos[contador]);
 });
-app.listen(4000, () => {
-    console.log("Ingressos. Porta 4000");
+app.delete("/ingressos/:id", (req,res,next) => {
+    const ingressoId = req.params.id;
+    ingressos.forEach((ingresso,index) => {
+        if(ingresso.id == ingressoId) {
+           return ingressos.splice(index,1);
+        }
+    })
+    res.status(200).json(ingressos);
+});
+app.listen(3000, () => {
+    console.log("Ingressos. Porta 3000");
 });
